@@ -76,7 +76,7 @@ class Note:
         return result
     
     @staticmethod
-    def validate_recipe(data):
+    def validate_note(data):
         is_valid = True
         return is_valid, data 
 
