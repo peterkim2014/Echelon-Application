@@ -1,0 +1,28 @@
+{% extends "welcome_page.html" %}
+
+{% block login_page %}
+<h1 class="login_title">Please Login</h1>
+
+{% with messages = get_flashed_messages(category_filter=['login']) %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="flash_login">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<form class="login_credentials" action="/login_page_form" method="POST">
+    <h2>Enter the following : </h2>
+    <label for="username">
+        Username:
+        <input type="text" name="username"/>
+    </label>
+    <label for="password">
+        Password:
+        <input type="password" name="password"/>
+    </label>
+    <button>Login</button>
+
+</form>
+
+{% endblock %}

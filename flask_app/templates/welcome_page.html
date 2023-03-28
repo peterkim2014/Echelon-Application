@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='welcome_page.css') }}">
+</head>
+<body>
+    
+    <h1 class="welcome_title">Welcome to my Flask Application</h1>
+
+    {% block login_page %}
+    {% endblock %}
+    {% block register_page %}
+    {% endblock %}
+
+    <div class="credentials">
+        <h3>Navigate to : </h3>
+        <a href="/login_page">Login Page</a>
+        <a href="/register_page">Register Page</a>
+    </div>
+
+
+
+</body>
+</html>

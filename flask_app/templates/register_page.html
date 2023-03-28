@@ -1,0 +1,37 @@
+{% extends "welcome_page.html" %}
+
+{% block register_page %}
+<h1 class="register_title">Please Register</h1>
+
+{% with messages = get_flashed_messages(category_filter=['registration']) %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="flash_register">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<form class="register_credentials" action="/create_user" method="POST">
+    
+    <h2>Enter the following : </h2>
+    <label for="username">
+        Username:
+        <input type="text" name="username"/>
+    </label>
+    <label for="email">
+        Email:
+        <input type="text" name="email"/>
+    </label>
+    <label for="password">
+        Password:
+        <input type="password" name="password"/>
+    </label>
+    <label for="confirm_password">
+        Confirm Password:
+        <input type="password" name="confirm_password"/>
+    </label>
+    <button>Register</button>
+
+</form>
+
+{% endblock %}
