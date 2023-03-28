@@ -1,0 +1,27 @@
+.credentials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    margin-top: 5%;
+} .credentials > a {
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+} .login_credentials, .register_credentials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} .login_credentials > button, .register_credentials > button {
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+} .welcome_title, .login_title, .register_title, .return_to_welcome, .flash_login, .flash_register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
