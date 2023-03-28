@@ -10,10 +10,7 @@ def homepage():
         return redirect("/login_page")
 
     user_id = session["user_id"]
-    user = User.get_by_id(user_id)
-    all_notes = Note.get_all()
-
-    return render_template("home_page.html", all_notes=all_notes, user=user)
+    return render_template("notes/home_page.html")
 
 @app.route("/view/<int:id>")
 def view_note(id):
