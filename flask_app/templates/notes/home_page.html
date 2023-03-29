@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home_page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_page.css') }}">
 </head>
 <body>
     
@@ -46,12 +46,17 @@
                     <!-- need to set up an area for information to be displayed, using the search bar as an active assistant for files and connections -->
                     <div class="content_body">
                         <div class="list_category">
-                            <p><b>List of Categories</b></p>
-                            <p><i>
-                                Open Calender <br>
-                                Open Notes <br>
-                                Open Groups <br>
-                            </i></p>
+                            <div>
+                                <p><b>List of Categories</b></p>
+                                <p><i>
+                                    Open Calender <br>
+                                    Open Notes <br>
+                                    Open Groups <br>
+                                </i></p>
+                            </div>
+                            <form method="POST" action="/refresh">
+                                <button>Refresh</button>
+                            </form>
                         </div>
                         <div class="user_commands">
                             {% if commands %}
@@ -89,16 +94,8 @@
             </div>
 
             <div class="footer">
-                
             </div>
-
         </div>
-
-
-
     </div>
-
-
-
 </body>
 </html>

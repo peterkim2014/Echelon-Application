@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='calender.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calender.css') }}">
 </head>
 <body>
     
@@ -23,11 +23,7 @@
         <div class="main">
             <!-- Either go sidebar or have a subnavbar underneath slogan to navigate through content/Calender -->
             <div class="main_sidebar">
-                <div class="calender">
-                    <h4>Calender</h4>
-                    <button >View</button>
-                    <button class="sidebar_calender">Manage</button>
-                </div>
+                <a href="/homepage">Return to home</a>
                 <div class="notes_sidebar">
                     <h4>Notes</h4>
                     <button class="note_options" href="/notes/view">View</button>
@@ -45,13 +41,37 @@
                 <div class="content">
                     <!-- need to set up an area for information to be displayed, using the search bar as an active assistant for files and connections -->
                     <div class="content_body">
-                        <div class="list_category">
-                            <p><b>List of Categories</b></p>
-                            <p><i>
-                                Open Calender <br>
-                                Open Notes <br>
-                                Open Groups <br>
-                            </i></p>
+                        <div class="light">
+
+                            <div class="calendar">
+                                <div class="calendar-header">
+                                    <span class="month-picker" id="month-picker">April</span>
+                                    <div class="year-picker">
+                                        <span class="year-change" id="prev-year">
+                                            <pre><</pre>
+                                        </span>
+                                        <span id="year">2022</span>
+                                        <span class="year-change" id="next-year">
+                                            <pre>></pre>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="calendar-body">
+                                    <div class="calendar-week-day">
+                                        <div>Sun</div>
+                                        <div>Mon</div>
+                                        <div>Tue</div>
+                                        <div>Wed</div>
+                                        <div>Thu</div>
+                                        <div>Fri</div>
+                                        <div>Sat</div>
+                                    </div>
+                                    <div class="calendar-days"></div>
+                                </div>
+                               
+                                <div class="month-list"></div>
+                            </div>
+
                         </div>
                         <div class="user_commands">
                             {% if commands %}
@@ -99,6 +119,6 @@
     </div>
 
 
-
+    <script src="{{url_for('static', filename='javascript/calender.js')}}"></script>
 </body>
 </html>
