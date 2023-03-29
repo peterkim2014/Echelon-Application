@@ -51,9 +51,8 @@ def homepage():
                     """
             else:
                 command_prompt = "Invalid Response. Please Try Again!"
-
-
-    return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
+        return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
+    return render_template("notes/home_page.html", command_prompt=command_prompt)
 
 @app.route("/create_command", methods=["POST"])
 def create_command_form():
@@ -69,5 +68,11 @@ def create_command_form():
     }
     # need to validate data before posting data
     Command.create(data)
+    return redirect("/homepage")
+
+@app.route("/delete_command", methods=["POST"])
+def delete_command():
+    command_id = request.form["id"]
+    delete_command = Command.delete_command(command_id)
     return redirect("/homepage")
 

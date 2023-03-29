@@ -54,6 +54,7 @@
                             </i></p>
                         </div>
                         <div class="user_commands">
+                            {% if commands %}
                             {% for command in commands %}
                             <div class="single_command">
                                 <h4>Your Command : </h4>
@@ -69,6 +70,7 @@
                                 </div>
                             </div>
                             {% endfor %}
+                            {% endif %}
                             <div class="return_commands">
                                 <h4>Command Response : </h4>
                                 <p><i>{{ command_prompt }}</i></p>
