@@ -54,6 +54,9 @@ month_names.forEach((e, index) => {
     let month = document.createElement('div')
     month.innerHTML = `<div data-month="${index}">${e}</div>`
     month.querySelector('div').onclick = () => {
+
+        // this is where i can get month, day, data
+        console.log("month", month.innerText)
         month_list.classList.remove('show')
         curr_month.value = index
         generateCalendar(index, curr_year.value)
