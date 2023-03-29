@@ -3,15 +3,6 @@ from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.note import Note
 
-@app.route("/homepage")
-def homepage():
-    if not "user_id" in session:
-        flash("Please Log In", "login")
-        return redirect("/login_page")
-
-    user_id = session["user_id"]
-    return render_template("notes/home_page.html")
-
 @app.route("/view/<int:id>")
 def view_note(id):
     if not "user_id" in session:
