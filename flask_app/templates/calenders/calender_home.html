@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home_page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='calender.css') }}">
 </head>
 <body>
     
@@ -25,18 +25,18 @@
             <div class="main_sidebar">
                 <div class="calender">
                     <h4>Calender</h4>
-                    <a class="sidebar_calender" href="/calender/view">View</a>
-                    <a class="sidebar_calender">Manage</a>
+                    <button >View</button>
+                    <button class="sidebar_calender">Manage</button>
                 </div>
                 <div class="notes_sidebar">
                     <h4>Notes</h4>
-                    <a class="note_options" href="/notes/view">View</a>
-                    <a class="note_options">Manage</a>
+                    <button class="note_options" href="/notes/view">View</button>
+                    <button class="note_options">Manage</button>
                 </div>
                 <div class="group">
                     <h4>Groups</h4>
-                    <a class="group_button">View</a>
-                    <a class="group_button">Manage</a>
+                    <button class="group_button">View</button>
+                    <button class="group_button">Manage</button>
                 </div>
             </div>
 

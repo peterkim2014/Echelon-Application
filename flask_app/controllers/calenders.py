@@ -1,0 +1,9 @@
+from flask import render_template, redirect, request, flash, session
+from flask_app import app
+from flask_app.models.user import User
+from flask_app.models.note import Note
+from flask_app.models.command import Command
+
+@app.route("/calender/view")
+def calender_home():
+    return render_template("calenders/calender_home.html")
