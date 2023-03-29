@@ -79,14 +79,11 @@ def delete_command():
 @app.route("/refresh", methods=["POST"])
 def delete_all_commands():
     commands = Command.get_all(session["user_id"])
-    count = 0
     if commands:
         for command in commands:
-            print(command)
-            count += 1
-            print(count)
-            Command.delete_command(count)
+            print(command.id)
+            Command.delete_command(command.id)
             print("DELETED")
-            return redirect("/homepage")
+        return redirect("/homepage")
 
     return redirect("/homepage")
