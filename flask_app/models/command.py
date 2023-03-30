@@ -123,6 +123,9 @@ class Command:
                 "View or Manage"
             """
             return command_prompt
+        if validation_response == 3:
+            print("VIEW")
+            return validation_response
         if validation_response == 4:
             print("MANAGE")
             command_prompt = """

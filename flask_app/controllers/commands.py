@@ -11,17 +11,23 @@ def homepage():
         return redirect("/login_page")
 
     user_id = session["user_id"]
+    last_command = 0
 
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
     if commands:
         if Command.command_response(commands, user_id):
             command_prompt = Command.command_response(commands, user_id)
+            if command_prompt == 3:
+                for command in commands:
+                    command_id = command.id
+                    last_command = command_id
+                Command.delete_command(last_command)
+                return redirect("/calender/view")
             return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
         else:
             command_prompt = Command.command_response(commands, user_id)
             return render_template("notes/home_page.html", command_prompt=command_prompt)
-        
     return render_template("notes/home_page.html", command_prompt=command_prompt)
 
 @app.route("/create_command", methods=["POST"])
@@ -31,7 +37,6 @@ def create_command_form():
         return redirect("/login_page")
 
     user = User.get_by_id(session["user_id"])
-    
     data = {
         "command": request.form["search_input"],
         "user_id": user.id
@@ -55,5 +60,4 @@ def delete_all_commands():
             Command.delete_command(command.id)
             print("DELETED")
         return redirect("/homepage")
-
     return redirect("/homepage")
