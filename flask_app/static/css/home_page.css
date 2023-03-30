@@ -13,7 +13,7 @@
     /* first iteration */
     /* background-color: rgb(200, 200, 173); */
     /* second iteration */
-    background-color: rgba(179, 179, 126, 0.749);
+    background-color: rgba(142, 142, 95, 0.656);
     } .nav_links, h2 {
         margin-left: 4%;
         margin-right: 4%;
@@ -72,7 +72,7 @@
                     height: fit-content;
                     margin: 0 auto;
                     display: flex;
-                    flex-direction: column-reverse;
+                    flex-direction: column;
                     gap: 1vh;
                     width: 100%;
                     overflow-x: scroll;
@@ -95,9 +95,6 @@
                 } .command_buttons {
                     display: flex;
                     align-items: center;
-                } .return_commands {
-                    overflow-anchor: auto;
-                    height: 1px;
     } .main_sidebar {
             display: flex;
             flex-direction: column;

@@ -15,11 +15,11 @@ def homepage():
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
     if commands:
-        if Command.command_response(commands):
-            command_prompt = Command.command_response(commands)
+        if Command.command_response(commands, user_id):
+            command_prompt = Command.command_response(commands, user_id)
             return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
         else:
-            command_prompt = Command.command_response(commands)
+            command_prompt = Command.command_response(commands, user_id)
             return render_template("notes/home_page.html", command_prompt=command_prompt)
         
     return render_template("notes/home_page.html", command_prompt=command_prompt)

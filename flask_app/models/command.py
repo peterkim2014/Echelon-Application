@@ -78,53 +78,57 @@ class Command:
         stage = 0
         initial_command = ["open calender","open notes","view","manage","add","edit"]
 
-        for initial in initial_command:
-            last_command = len(initial_command)
-            stage += 1
+        for index, initial in enumerate(initial_command):
+            index += 1
             if command.lower() == initial:
-                print(stage)
-                return stage
-            return stage
-
+                print(index, "index")     
+                return index
         return stage
 
     @classmethod
-    def command_response(cls, commands):
+    def command_response(cls, commands, id):
+        last_command = 0
         for command in commands:
             command_id = command.id
-            command_data = Command.get_one(command_id)
-            single_command = command_data.command
-            print(single_command)
-            initial_command = cls.command_list(single_command)
-            return initial_command
+            last_command = command_id
+            command_data = Command.get_all(id)
+
+        if command_data:
+            command_single = Command.get_one(last_command)
+            print(last_command)
+
+        single_command = command_single.command
+        initial_command = cls.command_list(single_command)
+        return initial_command
 
     @classmethod
     def command_list(cls, command):
-        initial_command = [
-            "open calender", "open notes", "view", "manage"
-        ]
-
-        for initial in initial_command:
-            if cls.validate_command(command) == 0:
-                command_prompt = """
-                    Invalid Response. Please try again!
-                """
-                return command_prompt
-            if cls.validate_command(command) == 1:
-                command_prompt = """
-                    "View or Manage"
-                """
-                return command_prompt
-            if cls.validate_command(command) == 2:
-                command_prompt = """
-                    "View or Manage"
-                """
-                return command_prompt
-            if cls.validate_command(command) == 4:
-                command_prompt = """
-                    Choose from one of the following : add, edit, delete.
-                """
-                return command_prompt
+        validation_response = cls.validate_command(command)
+        print(validation_response, "validation_response")
+        if validation_response == 0 or validation_response == None:
+            print("INVALID")
+            command_prompt = """
+                Invalid Response. Please try again!
+            """
+            return command_prompt
+        if validation_response == 1:
+            print("OPEN CALENDER")
+            command_prompt = """
+                "View or Manage"
+            """
+            return command_prompt
+        if validation_response == 2:
+            print("OPEN NOTES")
+            command_prompt = """
+                "View or Manage"
+            """
+            return command_prompt
+        if validation_response == 4:
+            print("MANAGE")
+            command_prompt = """
+                Choose from one of the following : add, edit, delete.
+            """
+            return command_prompt
         return False
 
 
