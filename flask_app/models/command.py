@@ -67,33 +67,106 @@ class Command:
         return result
         
     @classmethod
-    def validate_command(command):
+    def validate_user(command):
         is_valid = True
         if User.get_by_id(command.user_id) == User.get_by_username(session["user_username"]):
             return is_valid
-        
+
 
     @staticmethod
-    def start_command(command):
-        if command.lower() == "open calender":
-            print("open calender")
-            return True
-        if command.lower() == "open notes":
-            print("open notes")
-            return True
-        if command.lower() == "open groups":
-            print("open groups")
-            return True
+    def validate_command(command):
+        stage = 0
+        initial_command = ["open calender","open notes","view","manage","add","edit"]
 
-    @staticmethod
-    def initial_response(input):
-        if input == "view" or "View":
-            return True
-        if input == "manage" or "Manage":
-            return True
-        if input == "add" or "Add":
-            return True
-        if input == "update" or "Update":
-            return True
-        if input == "delete" or "Delete":
-            return True
+        for initial in initial_command:
+            last_command = len(initial_command)
+            stage += 1
+            if command.lower() == initial:
+                print(stage)
+                return stage
+            return stage
+
+        return stage
+
+    @classmethod
+    def command_response(cls, commands):
+        for command in commands:
+            command_id = command.id
+            command_data = Command.get_one(command_id)
+            single_command = command_data.command
+            print(single_command)
+            initial_command = cls.command_list(single_command)
+            return initial_command
+
+    @classmethod
+    def command_list(cls, command):
+        initial_command = [
+            "open calender", "open notes", "view", "manage"
+        ]
+
+        for initial in initial_command:
+            if cls.validate_command(command) == 0:
+                command_prompt = """
+                    Invalid Response. Please try again!
+                """
+                return command_prompt
+            if cls.validate_command(command) == 1:
+                command_prompt = """
+                    "View or Manage"
+                """
+                return command_prompt
+            if cls.validate_command(command) == 2:
+                command_prompt = """
+                    "View or Manage"
+                """
+                return command_prompt
+            if cls.validate_command(command) == 4:
+                command_prompt = """
+                    Choose from one of the following : add, edit, delete.
+                """
+                return command_prompt
+        return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # if Command.start_command(single_command.command) == True:
+            #     command_prompt = "View or Manage"
+            #     if command_prompt == "open calender":
+            #         if command_prompt == "view" or command_prompt == "View":
+            #             return redirect("/calender/view") 
+            # if Command.initial_response(single_command.command) == True:
+            #     if single_command.command == "View" or single_command.command == "view":
+            #         command_prompt = """
+            #             This is the list of your notes. If you would like to manage your notes. Type "manage"
+            #         """
+            #     if single_command.command == "Manage" or single_command.command == "manage":
+            #         command_prompt = """
+            #             To edit, choose from one of the following : Add, Update, Delete.
+            #         """
+            #     if single_command.command == "Add" or single_command.command == "add":
+            #         command_prompt = """
+            #             Please enter your note. Press enter to submit.
+            #         """
+            #         if single_command.command != None:
+            #             pass
+            #     # Need to work on connecting which note to update
+            #     if single_command.command == "Update" or single_command.command == "update":
+            #         command_prompt = """
+            #             Which note would you like to update?
+            #         """ 
+            #     if single_command.command == "Delete" or single_command.command == "delete":
+            #         command_prompt = """
+            #             Which note would you like to delete?
+            #         """
+            # else:
+            #     command_prompt = "Invalid Response. Please Try Again!"

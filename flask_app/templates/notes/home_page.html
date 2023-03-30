@@ -54,6 +54,10 @@
                                     Open Groups <br>
                                 </i></p>
                             </div>
+                            <div>
+                                <h4>Command Response : </h4>
+                                <p><i>{{ command_prompt }}</i></p>
+                            </div>
                             <form method="POST" action="/refresh">
                                 <button>Refresh</button>
                             </form>
@@ -73,13 +77,15 @@
                                         </label>
                                     </form>
                                 </div>
+                                
                             </div>
                             {% endfor %}
                             {% endif %}
-                            <div class="return_commands">
+                            <!-- <div class="return_commands">
                                 <h4>Command Response : </h4>
                                 <p><i>{{ command_prompt }}</i></p>
-                            </div>
+                            </div> -->
+
                         </div>
                     </div>
                     <form class="content_search" method="POST" action="/create_command">
@@ -88,6 +94,7 @@
                             <input class="search_input" type="search" name="search_input" value="" placeholder="Type a command..." autofocus>
                         </label>
                         <button class="submit_search">Submit</button>
+                        
                     </form>
 
                 </div>

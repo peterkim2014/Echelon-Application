@@ -95,6 +95,9 @@
                 } .command_buttons {
                     display: flex;
                     align-items: center;
+                } .return_commands {
+                    overflow-anchor: auto;
+                    height: 1px;
     } .main_sidebar {
             display: flex;
             flex-direction: column;
