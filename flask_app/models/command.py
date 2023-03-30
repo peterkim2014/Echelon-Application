@@ -95,8 +95,7 @@ class Command:
 
         if command_data:
             command_single = Command.get_one(last_command)
-            print(last_command)
-
+            
         single_command = command_single.command
         initial_command = cls.command_list(single_command)
         return initial_command
