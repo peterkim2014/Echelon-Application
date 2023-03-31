@@ -12,23 +12,60 @@ def homepage():
 
     user_id = session["user_id"]
     last_command = 0
+    previous_command = last_command - 1
+    current_path = None
 
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
+    
     if commands:
         if Command.command_response(commands, user_id):
             command_prompt = Command.command_response(commands, user_id)
+            print(command_prompt)
             if command_prompt == 3:
                 for command in commands:
                     command_id = command.id
-                    last_command = command_id
-                Command.delete_command(last_command)
+                    last_command_id = command_id
+                last_command = Command.get_one(last_command_id)
+                route = Command.command_route(last_command)
+                if route == 1:
+                    print("view calender")
+                Command.delete_command(last_command_id)
                 return redirect("/calender/view")
+            
             return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
         else:
             command_prompt = Command.command_response(commands, user_id)
             return render_template("notes/home_page.html", command_prompt=command_prompt)
     return render_template("notes/home_page.html", command_prompt=command_prompt)
+
+
+# second iteration
+#  if commands:
+#         if command_response:
+#             for command in command_response:
+#                 if command_prompt == command[0]:
+#                     for command in commands:
+#                         command_id = command.id
+#                         last_command_id = command_id
+#                     last_command = Command.get_one(last_command_id)
+#                     print(last_command)
+#                     route = Command.command_route(last_command)
+#                     if route == 1:
+#                         print("view calender")
+#                     Command.delete_command(last_command_id)
+#                     return redirect("/calender/view")
+#                 if command_prompt == command_response[1]:
+#                     for command in commands:
+#                         command_id = command.id
+#                         last_command_id = command_id
+#                     last_command = Command.get_one(last_command_id)
+#                     route = Command.command_route(last_command)
+#                     if route == 1:
+#                         print("view calender")
+#                     Command.delete_command(last_command_id)
+#                     return redirect("/calender/view")
+
 
 @app.route("/create_command", methods=["POST"])
 def create_command_form():

@@ -77,12 +77,18 @@ class Command:
     def validate_command(command):
         stage = 0
         initial_command = ["open calender","open notes","view","manage","add","edit"]
+        calender_command = ["view", "manage", "add", "edit"]
 
         for index, initial in enumerate(initial_command):
             index += 1
             if command.lower() == initial:
                 print(index, "index")     
                 return index
+        # for index, calender in enumerate(calender_command):
+        #     index += 1
+        #     if command.lower() == calender:
+        #         print(index, "index")     
+        #         return index
         return stage
 
     @classmethod
@@ -95,33 +101,37 @@ class Command:
 
         if command_data:
             command_single = Command.get_one(last_command)
-            
+
         single_command = command_single.command
         initial_command = cls.command_list(single_command)
         return initial_command
 
     @classmethod
     def command_list(cls, command):
+        path = None
         validation_response = cls.validate_command(command)
         print(validation_response, "validation_response")
         if validation_response == 0 or validation_response == None:
             print("INVALID")
+            path = None
             command_prompt = """
                 Invalid Response. Please try again!
             """
-            return command_prompt
+            return command_prompt, path
         if validation_response == 1:
             print("OPEN CALENDER")
+            path = "calender"
             command_prompt = """
                 "View or Manage"
             """
-            return command_prompt
+            return command_prompt, path
         if validation_response == 2:
+            path = "notes"
             print("OPEN NOTES")
             command_prompt = """
                 "View or Manage"
             """
-            return command_prompt
+            return command_prompt, path
         if validation_response == 3:
             print("VIEW")
             return validation_response
@@ -133,46 +143,26 @@ class Command:
             return command_prompt
         return False
 
+    @staticmethod
+    def command_path(command):
+        # initial_command = ["open calender","open notes"]
+        calender_command = ["view", "manage", "add", "edit"]
+        for index, initial in enumerate(calender_command):
+            index += 1
+            if command == initial:
+                return index
+        # for calender in calender_command:
+        #     if command == calender:
+        #         return "calender"
 
-
-
-
-
-
-
-
-
-
-
-
-            # if Command.start_command(single_command.command) == True:
-            #     command_prompt = "View or Manage"
-            #     if command_prompt == "open calender":
-            #         if command_prompt == "view" or command_prompt == "View":
-            #             return redirect("/calender/view") 
-            # if Command.initial_response(single_command.command) == True:
-            #     if single_command.command == "View" or single_command.command == "view":
-            #         command_prompt = """
-            #             This is the list of your notes. If you would like to manage your notes. Type "manage"
-            #         """
-            #     if single_command.command == "Manage" or single_command.command == "manage":
-            #         command_prompt = """
-            #             To edit, choose from one of the following : Add, Update, Delete.
-            #         """
-            #     if single_command.command == "Add" or single_command.command == "add":
-            #         command_prompt = """
-            #             Please enter your note. Press enter to submit.
-            #         """
-            #         if single_command.command != None:
-            #             pass
-            #     # Need to work on connecting which note to update
-            #     if single_command.command == "Update" or single_command.command == "update":
-            #         command_prompt = """
-            #             Which note would you like to update?
-            #         """ 
-            #     if single_command.command == "Delete" or single_command.command == "delete":
-            #         command_prompt = """
-            #             Which note would you like to delete?
-            #         """
-            # else:
-            #     command_prompt = "Invalid Response. Please Try Again!"
+    @classmethod
+    def command_route(cls, command):
+        print(command)
+        route = cls.command_path(command)
+        if route == 1:
+            print("open calender")
+            return 
+        if route == 2:
+            print("open notes")
+            return 
+        return route
