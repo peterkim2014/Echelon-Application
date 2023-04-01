@@ -65,7 +65,7 @@ class Note:
             SELECT * FROM notes WHERE id = %(id)s;
         """
         result = MySQLConnection(cls.dB).query_db(query, {"id": id})
-        return cls(result[0] if result else None)
+        return cls(result[0]) if result else None
     
     @classmethod
     def delete(cls, id):

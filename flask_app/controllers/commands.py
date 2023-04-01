@@ -13,12 +13,14 @@ def homepage():
     user_id = session["user_id"]
     last_command = 0
     previous_command = last_command - 1
-    path = None
-
+    
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
     response_category = None
     response = None
+    path = None
+    
+    notes_form_active = False
     
     if commands:
         for command in commands:
@@ -46,6 +48,8 @@ def homepage():
             if path == None:
                 Command.delete_command(previous_id)
                 return redirect("/homepage")
+        if response_category == "notes":
+            pass
 
 
         return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
