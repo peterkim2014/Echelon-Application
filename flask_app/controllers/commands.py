@@ -36,11 +36,12 @@ def homepage():
 
         if response_category == "command":
             command_prompt = response
-            print(response_category)
+            # print(response_category)
             return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
         if response_category == "redirect":
             path = response
-            print(response_data, "*"*10)
+            Command.delete_command(last_command_id)
+            # print(response_data, "*"*10)
             return redirect(path)
 
         

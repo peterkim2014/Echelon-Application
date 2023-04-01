@@ -57,7 +57,7 @@ class Command:
             SELECT * FROM commands WHERE id = %(id)s;
         """
         result = MySQLConnection(cls.dB).query_db(query, {"id":id})
-        return cls(result[0] if result else None)
+        return cls(result[0]) if result else None
     
     @classmethod
     def delete_command(cls, id):
@@ -133,20 +133,29 @@ class Command:
     def command_list(cls, input, user_id,redirect_path=redirect_path):
         list = cls.get_all(user_id)
         count = len(list)
+        current_id = None
         previous_id = None
         previous_command = None
-        if count > 1:
-            for data in list:
-                current_id = data.id
-                previous_id = current_id - 1
+        current_command = None
+        if list:
+            if count > 1:
+                for data in list:
+                    current_id = data.id
+                    previous_id = current_id - 1
+            if previous_id:
+                if current_id:
+                    current_data = cls.get_one(current_id)
+                    print(current_data)
+                    if cls.get_one(previous_id) != None:
+                        previous_data = cls.get_one(previous_id)
+                        current_command = current_data.command
+                        previous_command = previous_data.command
         
-        current_data = cls.get_one(current_id)
-        previous_data = cls.get_one(previous_id)
-        current_command = current_data.command
-        previous_command = previous_data.command
+            print(current_command)
+            print(previous_command)
 
-        command_path = cls.command_path(previous_command)
-        validation_response = cls.validate_command(input)
+            command_path = cls.command_path(previous_command)
+            validation_response = cls.validate_command(input)
 
         if validation_response == 0:
             command_prompt = """
