@@ -25,6 +25,7 @@ def homepage():
             command_id = command.id
             last_command_id = command_id
 
+        previous_id = last_command_id - 1
         last_command_data = Command.get_one(last_command_id)
         last_command = last_command_data.command
         response_data = Command.command_list(last_command, user_id)
@@ -40,7 +41,12 @@ def homepage():
         if response_category == "redirect":
             path = response
             Command.delete_command(last_command_id)
-            return redirect(path)
+            if path != None:
+                return redirect(path)
+            if path == None:
+                Command.delete_command(previous_id)
+                return redirect("/homepage")
+
 
         return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
 
