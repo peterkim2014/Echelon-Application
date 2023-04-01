@@ -84,22 +84,8 @@ class Command:
                 return stage
             else:
                 stage += 1
-
-        if stage == 0:
+        for stage in range(0, stage):
             return stage
-        if stage == 1:
-            return stage
-        if stage == 2:
-            return stage
-        if stage == 3:
-            return stage
-        if stage == 4:
-            return stage
-        if stage == 5:
-            return stage
-        if stage == 6:
-            return stage
-        return stage
 
 
     @classmethod
@@ -121,12 +107,10 @@ class Command:
     @staticmethod
     def command_path(command):
         path = None
-        print(command, "path","*"*20)
         if command == "open calender":
             path = "/calender/view"
         if command == "open notes":
             path = "/notes/view"
-        print(path)
         return path
 
     @classmethod
@@ -150,9 +134,6 @@ class Command:
                         previous_data = cls.get_one(previous_id)
                         current_command = current_data.command
                         previous_command = previous_data.command
-        
-            print(current_command)
-            print(previous_command)
 
             command_path = cls.command_path(previous_command)
             validation_response = cls.validate_command(input)
@@ -175,6 +156,7 @@ class Command:
                 Choose from one of the following : add, edit, delete.
             """
             return "command",command_prompt
+        
         return False
 
 

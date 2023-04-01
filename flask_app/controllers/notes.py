@@ -72,8 +72,8 @@ def like_note(id):
 
     is_liked = Note.get_many_id(session["user_id"])
     if is_liked:
-        for recipe in is_liked:
-            print(recipe.id)
+        for note in is_liked:
+            print(note.id)
             print(id)
             if Note.check_like(data) == False:
                 print("LIKED")

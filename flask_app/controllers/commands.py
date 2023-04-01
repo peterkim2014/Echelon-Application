@@ -36,20 +36,15 @@ def homepage():
 
         if response_category == "command":
             command_prompt = response
-            # print(response_category)
-            return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
+            return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
         if response_category == "redirect":
             path = response
             Command.delete_command(last_command_id)
-            # print(response_data, "*"*10)
             return redirect(path)
 
-        
+        return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
 
-
-        return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
-
-    return render_template("notes/home_page.html", command_prompt=command_prompt)
+    return render_template("main/home_page.html", command_prompt=command_prompt)
 
 
 @app.route("/create_command", methods=["POST"])
