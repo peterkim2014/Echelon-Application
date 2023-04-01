@@ -5,6 +5,7 @@ from flask_app.models.user import User
 class Command:
 
     dB = "echelon_data"
+    redirect_path = None
 
     def __init__(self, command_data):
         self.id = command_data["id"]
@@ -74,26 +75,37 @@ class Command:
 
 
     @staticmethod
-    def validate_command(command):
+    def validate_command(input):
         stage = 0
-        initial_command = ["open calender","open notes","view","manage","add","edit"]
-        calender_command = ["view", "manage", "add", "edit"]
+        command_list = ["open calender","open notes","view","manage","add","edit","invalid"]
 
-        for index, initial in enumerate(initial_command):
-            index += 1
-            if command.lower() == initial:
-                print(index, "index")     
-                return index
-        # for index, calender in enumerate(calender_command):
-        #     index += 1
-        #     if command.lower() == calender:
-        #         print(index, "index")     
-        #         return index
+        for command in command_list:
+            if input == command:
+                return stage
+            else:
+                stage += 1
+
+        if stage == 0:
+            return stage
+        if stage == 1:
+            return stage
+        if stage == 2:
+            return stage
+        if stage == 3:
+            return stage
+        if stage == 4:
+            return stage
+        if stage == 5:
+            return stage
+        if stage == 6:
+            return stage
         return stage
+
 
     @classmethod
     def command_response(cls, commands, id):
         last_command = 0
+
         for command in commands:
             command_id = command.id
             last_command = command_id
@@ -105,64 +117,57 @@ class Command:
         single_command = command_single.command
         initial_command = cls.command_list(single_command)
         return initial_command
+    
+    @staticmethod
+    def command_path(command):
+        path = None
+        if command == "open calender":
+            path = "/calender/view"
+        if command == "open notes":
+            path = "/notes/view"
+        return path
 
     @classmethod
-    def command_list(cls, command):
-        path = None
-        validation_response = cls.validate_command(command)
-        print(validation_response, "validation_response")
-        if validation_response == 0 or validation_response == None:
-            print("INVALID")
-            path = None
+    def command_list(cls, input, user_id,redirect_path=redirect_path):
+        list = cls.get_all(user_id)
+        count = len(list)
+        previous_id = None
+        previous_command = None
+        if count > 1:
+            for data in list:
+                current_id = data.id
+                previous_id = current_id - 1
+        for previous_num in range(0,-5):
+            if cls.get_one(previous_id + previous_num) == None:
+                previous_id -= 1
+            if cls.get_one(previous_id + previous_num) != None:
+                previous_data = cls.get_one(previous_id + previous_num)
+                previous_command = previous_data.command
+                break
+
+        command_path = cls.command_path(input)
+        if command_path != None:
+            saved_command = command_path
+
+        validation_response = cls.validate_command(input)
+        if validation_response == 0:
             command_prompt = """
-                Invalid Response. Please try again!
+                "View or Manage"
             """
-            return command_prompt, path
+            return "command",command_prompt
         if validation_response == 1:
-            print("OPEN CALENDER")
-            path = "calender"
             command_prompt = """
                 "View or Manage"
             """
-            return command_prompt, path
+            return "command",command_prompt
         if validation_response == 2:
-            path = "notes"
-            print("OPEN NOTES")
-            command_prompt = """
-                "View or Manage"
-            """
-            return command_prompt, path
+            redirect_path = cls.command_path(previous_command)
+            return "redirect",redirect_path
         if validation_response == 3:
-            print("VIEW")
-            return validation_response
-        if validation_response == 4:
-            print("MANAGE")
             command_prompt = """
                 Choose from one of the following : add, edit, delete.
             """
-            return command_prompt
+            return "command",command_prompt
         return False
 
-    @staticmethod
-    def command_path(command):
-        # initial_command = ["open calender","open notes"]
-        calender_command = ["view", "manage", "add", "edit"]
-        for index, initial in enumerate(calender_command):
-            index += 1
-            if command == initial:
-                return index
-        # for calender in calender_command:
-        #     if command == calender:
-        #         return "calender"
 
-    @classmethod
-    def command_route(cls, command):
-        print(command)
-        route = cls.command_path(command)
-        if route == 1:
-            print("open calender")
-            return 
-        if route == 2:
-            print("open notes")
-            return 
-        return route
