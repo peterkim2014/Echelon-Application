@@ -13,7 +13,7 @@ def homepage():
     user_id = session["user_id"]
     last_command = 0
     previous_command = last_command - 1
-    current_path = None
+    path = None
 
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
@@ -35,9 +35,13 @@ def homepage():
             response = response_data[1]
 
         if response_category == "command":
+            command_prompt = response
             print(response_category)
+            return render_template("notes/home_page.html", command_prompt=command_prompt, commands=commands)
         if response_category == "redirect":
-            print(response_category)
+            path = response
+            print(response_data, "*"*10)
+            return redirect(path)
 
         
 

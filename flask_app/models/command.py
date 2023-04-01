@@ -80,7 +80,7 @@ class Command:
         command_list = ["open calender","open notes","view","manage","add","edit","invalid"]
 
         for command in command_list:
-            if input == command:
+            if input.lower() == command:
                 return stage
             else:
                 stage += 1
@@ -121,10 +121,12 @@ class Command:
     @staticmethod
     def command_path(command):
         path = None
+        print(command, "path","*"*20)
         if command == "open calender":
             path = "/calender/view"
         if command == "open notes":
             path = "/notes/view"
+        print(path)
         return path
 
     @classmethod
@@ -137,19 +139,15 @@ class Command:
             for data in list:
                 current_id = data.id
                 previous_id = current_id - 1
-        for previous_num in range(0,-5):
-            if cls.get_one(previous_id + previous_num) == None:
-                previous_id -= 1
-            if cls.get_one(previous_id + previous_num) != None:
-                previous_data = cls.get_one(previous_id + previous_num)
-                previous_command = previous_data.command
-                break
+        
+        current_data = cls.get_one(current_id)
+        previous_data = cls.get_one(previous_id)
+        current_command = current_data.command
+        previous_command = previous_data.command
 
-        command_path = cls.command_path(input)
-        if command_path != None:
-            saved_command = command_path
-
+        command_path = cls.command_path(previous_command)
         validation_response = cls.validate_command(input)
+
         if validation_response == 0:
             command_prompt = """
                 "View or Manage"
@@ -161,7 +159,7 @@ class Command:
             """
             return "command",command_prompt
         if validation_response == 2:
-            redirect_path = cls.command_path(previous_command)
+            redirect_path = command_path
             return "redirect",redirect_path
         if validation_response == 3:
             command_prompt = """
