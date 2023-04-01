@@ -3,17 +3,17 @@ from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.note import Note
 
-@app.route("/view/<int:id>")
-def view_note(id):
+@app.route("/notes/view")
+def view_note():
     if not "user_id" in session:
         flash("Please Log In", "login")
         return redirect("/login_page")
     user = User.get_by_id(session["user_id"])
-    return render_template("view_note.html", user=user)
+    return render_template("notes/view_note.html", user=user)
 
 @app.route("/note/new")
 def create_note_page():
-    return render_template("add_note.html")
+    return render_template("notes/add_note.html")
 
 @app.route("/note/new/create", methods=["POST"])
 def create_note_form():
@@ -34,7 +34,7 @@ def create_note_form():
 @app.route("/edit/<int:id>")
 def edit_note_page(id):
     note = Note.get_by_id(id)
-    return render_template("edit_note.html", note=note)
+    return render_template("notes/edit_note.html", note=note)
 
 @app.route("/edit/note", methods=["POST"])
 def edit_note():

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calender.css') }}">
+</head>
+<body>
+    
+    <div id="global">
+
+        <div class="nav_bar">
+            <h2>Echelon</h2>
+            <div class="nav_links">
+                <a href="/about_page">About</a>
+                <a href="/setting_page">Settings</a>
+                <a href="/login_page">Logout</a>
+            </div>
+        </div>
+
+        <div class="main">
+            <!-- Either go sidebar or have a subnavbar underneath slogan to navigate through content/Calender -->
+            <div class="main_sidebar">
+                <a href="/homepage">Return to home</a>
+                <div class="notes_sidebar">
+                    <h4>Notes</h4>
+                    <button class="note_options" href="/notes/view">View</button>
+                    <button class="note_options">Manage</button>
+                </div>
+                <div class="group">
+                    <h4>Groups</h4>
+                    <button class="group_button">View</button>
+                    <button class="group_button">Manage</button>
+                </div>
+            </div>
+
+            <div class="main_body">
+                <h3><i>Organize your future</i></h3>
+                <div class="content">
+                    <!-- need to set up an area for information to be displayed, using the search bar as an active assistant for files and connections -->
+                    <div class="content_body">
+                        
+                        <div class="notes">
+
+                        </div>
+                        <div class="user_commands">
+                            {% if commands %}
+                            {% for command in commands %}
+                            <div class="single_command">
+                                <h4>Your Command : </h4>
+                                <p>{{ command.command }}</p>
+                                <p>{{ command.created_at }}</p>
+                                <div class="command_buttons">
+                                    <form action="/delete_command" method="POST">
+                                        <label for="delete">
+                                            <input type="hidden" name="id" value={{ command.id }}>
+                                            <input name="delete" type="submit" value="Undo"/>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            <div class="return_commands">
+                                <h4>Command Response : </h4>
+                                <p><i>{{ command_prompt }}</i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="content_search" method="POST" action="/create_command">
+                        <label class="search_label" for="search_input">
+                            <input type=hidden name="user_id" value={{ user_id }}>
+                            <input class="search_input" type="search" name="search_input" value="" placeholder="Type a command..." autofocus>
+                        </label>
+                        <button class="submit_search">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <script src="{{url_for('static', filename='javascript/calender.js')}}"></script>
+</body>
+</html>
