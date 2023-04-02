@@ -117,62 +117,64 @@ class Command:
     @classmethod
     def command_list(cls, input, user_id,redirect_path=redirect_path):
         list = cls.get_all(user_id)
+        notes_list = Note.get_all_note_one_user(user_id)
         count = len(list)
         current_id = None
         previous_id = None
         previous_command = None
         current_command = None
-        previous_id_1 = None
+        current_id_1 = None
         previous_id_2 = None
-        previous_id_3 = None
+        current_id_1_command = None
         previous_id_1_command = None
-        previous_id_2_command = None
         previous_id_3_command = None
+        notes_list = None
+        notes_path = None
         if list:
             if count > 1:
                 for data in list:
                     current_id = data.id
                     previous_id = current_id - 1
-                    if count > 3:
-                        for data in list:
-                            # add : input
-                            current_id = data.id
-                            # add
-                            previous_id_1 = current_id - 1
-                            # manage
-                            previous_id_2 = current_id - 2
-                            # open calender
-                            previous_id_3 = current_id - 3
-                        
             if previous_id:
                 if current_id:
                     current_data = cls.get_one(current_id)
-                    print(current_data)
                     if cls.get_one(previous_id) != None:
                         previous_data = cls.get_one(previous_id)
                         current_command = current_data.command
                         previous_command = previous_data.command
-                    if Note.get_one_note(previous_id_3) != None:
-                        previous_id_1 = cls.get_one(previous_id_1)
-                        previous_id_2 = cls.get_one(previous_id_2)
-                        previous_id_3 = cls.get_one(previous_id_3)
-                        previous_id_1_command = previous_id_1.command
-                        previous_id_2_command = previous_id_2.command
-                        previous_id_3_command = previous_id_3.command
-
-            previous_command_1 = cls.command_path(previous_id_1_command)
-            previous_command_2 = cls.command_path(previous_id_2_command)
-            previous_command_3 = cls.command_path(previous_id_3_command)
-
-            notes_path_1 = cls.notes_path(previous_command_1)
-            notes_path_2 = cls.notes_path(previous_command_2)
-            notes_path_3 = cls.notes_path(previous_command_3)
-            print(notes_path_1)
-            print(notes_path_2)
-            print(notes_path_3)
 
             command_path = cls.command_path(previous_command)
             validation_response = cls.validate_command(input)
+
+
+            if count > 2:
+                for data in list:
+                    # add
+                    current_id_1 = data.id
+                    # manage
+                    previous_id_1 = current_id - 1
+                    # open calender
+                    previous_id_2 = current_id - 2
+
+                if cls.get_one(previous_id_2) != None:
+                    current_id_1 = cls.get_one(current_id)
+                    previous_id_1 = cls.get_one(previous_id_1)
+                    previous_id_2 = cls.get_one(previous_id_2)
+
+                    print(current_id_1.command)
+                    print(previous_id_1.command)
+                    print(previous_id_2.command)
+
+                    current_id_1_command = current_id_1.command
+                    previous_id_1_command = previous_id_1.command
+                    previous_id_2_command = previous_id_2.command
+
+                    notes_list = [current_id_1_command, previous_id_1_command, previous_id_2_command]
+                    notes_path = cls.notes_path(notes_list)
+
+                    print(notes_list)
+                    print(notes_path)
+
 
         if validation_response == 0:
             command_prompt = """
@@ -192,9 +194,21 @@ class Command:
                 Choose from one of the following : add, edit, delete.
             """
             return "command",command_prompt
-
+        if notes_path == "add":
+            command_prompt = """
+                Enter your your note and submit
+            """
+            return "add_note", command_prompt
         return False
 
     @classmethod
-    def notes_path(cls, command):
-        pass
+    def notes_path(cls, commands):
+        is_add = None
+        notes_path = ["open notes", "manage", "add"]
+        for command in commands:
+            for note in notes_path:
+                if command == note:
+                    is_add = "add"
+        print(is_add)
+        return is_add
+

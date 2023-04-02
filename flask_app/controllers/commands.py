@@ -19,7 +19,7 @@ def homepage():
     response_category = None
     response = None
     path = None
-    
+
     notes_form_active = False
     
     if commands:
@@ -48,8 +48,9 @@ def homepage():
             if path == None:
                 Command.delete_command(previous_id)
                 return redirect("/homepage")
-        if response_category == "notes":
-            pass
+        if response_category == "add_note":
+            command_prompt = response
+            return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
 
 
         return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
