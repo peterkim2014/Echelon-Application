@@ -76,28 +76,29 @@
                                             <input name="delete" type="submit" value="Undo"/>
                                         </label>
                                     </form>
-                                </div>
-                                
+                                </div>  
                             </div>
                             {% endfor %}
                             {% endif %}
-                            <!-- <div class="return_commands">
-                                <h4>Command Response : </h4>
-                                <p><i>{{ command_prompt }}</i></p>
-                            </div> -->
-
                         </div>
                     </div>
-                    
+                    {% if response_category == "add_note" %}
+                    <form class="content_search" method="POST" action="/note/new/create">
+                        <label class="search_label" for="search_input">
+                            <input type=hidden name="user_id" value={{ user_id }}>
+                            <input class="search_input" type="text" name="note" value="" placeholder="Enter your note..." autofocus>
+                        </label>
+                        <button class="submit_search">Submit</button>
+                    </form>
+                    {% else %}
                     <form class="content_search" method="POST" action="/create_command">
                         <label class="search_label" for="search_input">
                             <input type=hidden name="user_id" value={{ user_id }}>
                             <input class="search_input" type="search" name="search_input" value="" placeholder="Type a command..." autofocus>
                         </label>
                         <button class="submit_search">Submit</button>
-                        
                     </form>
-
+                    {% endif %}
                 </div>
             </div>
 

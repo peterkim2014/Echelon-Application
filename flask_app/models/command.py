@@ -146,7 +146,6 @@ class Command:
             command_path = cls.command_path(previous_command)
             validation_response = cls.validate_command(input)
 
-
             if count > 2:
                 for data in list:
                     # add
@@ -161,20 +160,12 @@ class Command:
                     previous_id_1 = cls.get_one(previous_id_1)
                     previous_id_2 = cls.get_one(previous_id_2)
 
-                    print(current_id_1.command)
-                    print(previous_id_1.command)
-                    print(previous_id_2.command)
-
                     current_id_1_command = current_id_1.command
                     previous_id_1_command = previous_id_1.command
                     previous_id_2_command = previous_id_2.command
 
                     notes_list = [current_id_1_command, previous_id_1_command, previous_id_2_command]
                     notes_path = cls.notes_path(notes_list)
-
-                    print(notes_list)
-                    print(notes_path)
-
 
         if validation_response == 0:
             command_prompt = """
@@ -191,7 +182,7 @@ class Command:
             return "redirect",redirect_path
         if validation_response == 3:
             command_prompt = """
-                Choose from one of the following : add, edit, delete.
+                Choose from one of the following : add or edit.
             """
             return "command",command_prompt
         if notes_path == "add":
@@ -209,6 +200,5 @@ class Command:
             for note in notes_path:
                 if command == note:
                     is_add = "add"
-        print(is_add)
         return is_add
 

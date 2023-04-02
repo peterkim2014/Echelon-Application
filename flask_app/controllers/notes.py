@@ -20,11 +20,12 @@ def create_note_form():
     if not "user_id" in session:
         flash("Please Log In", "login")
         return redirect("/login_page")
-
+    user_id = session["user_id"]
     data = {
         "note": request.form["note"],
-        "user_id": request.form["user_id"]
+        "user_id": user_id
     }
+    print(data)
     if Note.validate_note(data):
         Note.save(data)
         return redirect("/homepage")
