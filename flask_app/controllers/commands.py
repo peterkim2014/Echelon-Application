@@ -30,10 +30,11 @@ def homepage():
             command_id = command.id
             last_command_id = command_id
 
-        previous_id = last_command_id - 1
         last_command_data = Command.get_one(last_command_id)
         last_command = last_command_data.command
+        print(last_command)
         response_data = Command.command_list(last_command, user_id)
+        print(response_data)
 
         if response_data:
             command_data = response_data

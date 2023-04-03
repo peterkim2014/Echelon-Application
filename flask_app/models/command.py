@@ -118,7 +118,6 @@ class Command:
     @classmethod
     def command_list(cls, input, user_id,redirect_path=redirect_path):
         commands_list = cls.get_all(user_id)
-        notes_list = Note.get_all_note_one_user(user_id)
         count = len(commands_list)
         current_id_commands = None
         previous_id_commands = None
@@ -134,9 +133,9 @@ class Command:
             if count > 1:
                 for index, data in enumerate(commands_list):
                     if index == 0:
-                        current_id_commands = data.id
-                    if index == 1:
                         previous_id_commands = data.id
+                    if index == 1:
+                        current_id_commands = data.id
             if previous_id_commands:
                 if current_id_commands:
                     current_data = cls.get_one(current_id_commands)
@@ -144,18 +143,24 @@ class Command:
                         previous_data = cls.get_one(previous_id_commands)
                         current_command = current_data.command
                         previous_command = previous_data.command
-
+            print(previous_command)
+            print(current_command)
             command_path = cls.command_path(previous_command)
-            validation_response = cls.validate_command(input)
+            validation_response = cls.validate_command(current_command)
+            print(command_path)
+            print(validation_response)
 
             if count > 2:
                 for index, data in enumerate(commands_list):
-                    # add
-                    current_id_1 = data.id
-                    # manage
-                    previous_id_1 = data.id
-                    # open calender
-                    previous_id_2 = data.id
+                    if index == 0:
+                        # add
+                        current_id_1 = data.id
+                    if index == 1:
+                        # manage
+                        previous_id_1 = data.id
+                    if index == 2:
+                        # open calender
+                        previous_id_2 = data.id
 
                 if cls.get_one(previous_id_2) != None:
                     current_id_1 = cls.get_one(current_id_1)
