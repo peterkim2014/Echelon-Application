@@ -9,7 +9,10 @@ def view_note():
         flash("Please Log In", "login")
         return redirect("/login_page")
     user = User.get_by_id(session["user_id"])
-    return render_template("notes/view_note.html", user=user)
+    all_notes = Note.get_all_note_one_user(user.id)
+    print(all_notes)
+
+    return render_template("notes/view_note.html", user=user, all_notes=all_notes)
 
 @app.route("/note/new")
 def create_note_page():
@@ -42,9 +45,10 @@ def edit_note():
     if not "user_id" in session:
         flash("Please Log In", "login")
         return redirect("/login_page")
+    user_id = session["user_id"]
     data = {
         "note": request.form["note"],
-        "user_id": request.form["user_id"]
+        "user_id": user_id
     }
     
     if Note.validate_note(data):

@@ -79,9 +79,10 @@ class Command:
     def validate_command(input):
         stage = 0
         command_list = ["open calender","open notes","view","manage","add","edit","invalid"]
-
+        
         for command in command_list:
-            if input.lower() == command:
+            # if input.lower() == command:
+            if input == command:
                 return stage
             else:
                 stage += 1
@@ -121,13 +122,12 @@ class Command:
         count = len(list)
         current_id = None
         previous_id = None
-        previous_command = None
         current_command = None
+        previous_command = None
         current_id_1 = None
         previous_id_2 = None
         current_id_1_command = None
         previous_id_1_command = None
-        previous_id_3_command = None
         notes_list = None
         notes_path = None
         if list:
@@ -190,15 +190,25 @@ class Command:
                 Enter your your note and submit
             """
             return "add_note", command_prompt
+        if notes_path == "edit":
+            command_prompt = """
+                Edit your note and submit
+            """
+            return "edit_note", command_prompt
         return False
 
     @classmethod
     def notes_path(cls, commands):
-        is_add = None
-        notes_path = ["open notes", "manage", "add"]
+        is_path = None
+        notes_add = ["open notes", "manage", "add"]
+        notes_edit = ["open notes", "manage", "edit"]
+
         for command in commands:
-            for note in notes_path:
+            for note in notes_add:
                 if command == note:
-                    is_add = "add"
-        return is_add
+                    is_path = "add"
+            for note in notes_edit:
+                if command == note:
+                    is_path = "edit"
+        return is_path
 

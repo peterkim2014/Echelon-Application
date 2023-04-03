@@ -63,10 +63,20 @@
                             </div>
                             {% endfor %}
                             {% endif %}
+                            {% if commands %}
                             <div class="return_commands">
                                 <h4>Command Response : </h4>
                                 <p><i>{{ command_prompt }}</i></p>
                             </div>
+                            {% endif %}
+                            {% if all_notes %}
+                            {% for note in all_notes %}
+                            <div class="notes-body">
+                                <h5>Note</h5>
+                                <p>{{ note.note }}</p>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                     <form class="content_search" method="POST" action="/create_command">

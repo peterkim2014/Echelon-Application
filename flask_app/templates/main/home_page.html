@@ -90,6 +90,14 @@
                         </label>
                         <button class="submit_search">Submit</button>
                     </form>
+                    {% elif response_category == "edit_note" %}
+                    <form class="content_search" method="POST" action="/edit/note">
+                        <label class="search_label" for="search_input">
+                            <input type=hidden name="user_id" value={{ user_id }}>
+                            <input class="search_input" type="text" name="note" value={{ note.note }} autofocus>
+                        </label>
+                        <button class="submit_search">Submit</button>
+                    </form>
                     {% else %}
                     <form class="content_search" method="POST" action="/create_command">
                         <label class="search_label" for="search_input">

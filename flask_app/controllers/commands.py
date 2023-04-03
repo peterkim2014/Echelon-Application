@@ -13,12 +13,17 @@ def homepage():
     user_id = session["user_id"]
     last_command = 0
     previous_command = last_command - 1
+    all_notes = Note.get_all_note_one_user(user_id)
+    last_note_id = None
     
     command_prompt = "Please enter a command!"
     commands = Command.get_all(user_id)
     response_category = None
     response = None
     path = None
+
+    for note in all_notes:
+        last_note_id = note.id
     
     if commands:
         for command in commands:
@@ -50,6 +55,12 @@ def homepage():
             command_prompt = response
             Command.delete_command(last_command_id)
             return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands, response_category=response_category)
+        if response_category == "edit_note":
+            command_prompt = response
+            Command.delete_command(last_command_id)
+            # add note for edit
+            note = Note.get_one_note(last_note_id)
+            return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands, response_category=response_category, note=note)
 
 
         return render_template("main/home_page.html", command_prompt=command_prompt, commands=commands)
