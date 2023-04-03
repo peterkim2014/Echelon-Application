@@ -143,12 +143,13 @@ class Command:
                         previous_data = cls.get_one(previous_id_commands)
                         current_command = current_data.command
                         previous_command = previous_data.command
-            print(previous_command)
-            print(current_command)
+
             command_path = cls.command_path(previous_command)
-            validation_response = cls.validate_command(current_command)
-            print(command_path)
-            print(validation_response)
+            # validation_response = cls.validate_command(current_command)
+            if input:
+                validation_response = cls.validate_command(input)
+            else:
+                validation_response = cls.validate_command(current_command)
 
             if count > 2:
                 for index, data in enumerate(commands_list):
@@ -163,16 +164,18 @@ class Command:
                         previous_id_2 = data.id
 
                 if cls.get_one(previous_id_2) != None:
-                    current_id_1 = cls.get_one(current_id_1)
-                    previous_id_1 = cls.get_one(previous_id_1)
-                    previous_id_2 = cls.get_one(previous_id_2)
+                    get_one_id_1 = cls.get_one(current_id_1)
+                    get_one_id_2 = cls.get_one(previous_id_1)
+                    get_one_id_3 = cls.get_one(previous_id_2)
 
-                    current_id_1_command = current_id_1.command
-                    previous_id_1_command = previous_id_1.command
-                    previous_id_2_command = previous_id_2.command
+                    current_id_1_command = get_one_id_1.command
+                    previous_id_1_command = get_one_id_2.command
+                    previous_id_2_command = get_one_id_3.command
 
                     notes_list = [current_id_1_command, previous_id_1_command, previous_id_2_command]
                     notes_path = cls.notes_path(notes_list)
+
+            print(validation_response)
 
         if validation_response == 0:
             command_prompt = """
@@ -193,6 +196,7 @@ class Command:
             """
             return "command",command_prompt
         if notes_path == "add":
+            print("add prompt")
             command_prompt = """
                 Enter your your note and submit
             """
