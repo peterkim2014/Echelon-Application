@@ -58,7 +58,7 @@
                     height: 100%;
             } .content_body {
                 height: 95%;   
-                width: 100%;
+                width: auto;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
@@ -69,42 +69,78 @@
                 } .list_category > p {
                     margin-left: 1.25%;
                 } .user_commands {
-                    height: fit-content;
-                    margin: 0 auto;
+                    /* height: fit-content; */
+                    height: 95%;
+                    width: 100%;
+                    margin: none;
                     display: flex;
                     flex-direction: column;
                     gap: 1vh;
-                    width: 100%;
+                    /* width: 100%; */
+                    overflow-y: scroll;
                     overflow-x: scroll;
-                } .single_command, .return_commands {
-                    display: flex;
-                    justify-content: space-between;
-                    width: 95%;
-                    background-color: rgba(179, 179, 126, 0.134);
-                    padding-left: 2.5%;
-                    padding-right: 2.5%;
-                } .user_commands > p {
-                    margin: 0 auto;
-                    display: flex;
-                    justify-content: space-between;
-                } .return_commands > p {
-                    margin: 0 auto;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                } .command_buttons {
-                    display: flex;
-                    align-items: center;
-                } .command_response {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                } .command_response > h4 {
-                    margin: 0 auto;
-                } .list_category > form {
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: center ;
+                    } .single_command, .return_commands {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 95%;
+                        background-color: rgba(179, 179, 126, 0.134);
+                        padding-left: 2.5%;
+                        padding-right: 2.5%;
+                        } .user_commands > p {
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: space-between;
+                        } .return_commands > p {
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                    } .command_buttons {
+                        display: flex;
+                        align-items: center;
+                    } .command_response {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        } .command_response > h4 {
+                            margin: 0 auto;
+                        } .list_category > form {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center ;
+                    } .note_body {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-end;
+                        height: 70%;
+                        margin-left: 5%;
+                        width: 100%;
+                        overflow-x: scroll;
+                        gap: 5vw;
+                    } .note {
+                            background-color: rgba(179, 179, 126, 0.134);
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 80%;
+                            height: 40%;
+                            gap: 1.25vh;
+                        } .note > table {
+                            width: 100%;
+                        } tbody > tr {
+                            display: flex;
+                            width: 100%;
+                        } td {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-evenly;
+                        } .note_button {
+                            margin-top: 20%;
+                            gap: 2.5vw;
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-evenly;
     } .main_sidebar {
             display: flex;
             flex-direction: column;

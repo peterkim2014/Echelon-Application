@@ -76,35 +76,35 @@
                     gap: 1vh;
                     width: 100%;
                     overflow-x: scroll;
-                } .single_command, .return_commands {
-                    display: flex;
-                    justify-content: space-between;
-                    width: 95%;
-                    background-color: rgba(179, 179, 126, 0.134);
-                    padding-left: 2.5%;
-                    padding-right: 2.5%;
-                } .user_commands > p {
-                    margin: 0 auto;
-                    display: flex;
-                    justify-content: space-between;
-                } .return_commands > p {
-                    margin: 0 auto;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                } .command_buttons {
-                    display: flex;
-                    align-items: center;
-                } .command_response {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                } .command_response > h4 {
-                    margin: 0 auto;
-                } .list_category > form {
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: center ;
+                    } .single_command, .return_commands {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 95%;
+                        background-color: rgba(179, 179, 126, 0.134);
+                        padding-left: 2.5%;
+                        padding-right: 2.5%;
+                        } .user_commands > p {
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: space-between;
+                        } .return_commands > p {
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                    } .command_buttons {
+                        display: flex;
+                        align-items: center;
+                    } .command_response {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        } .command_response > h4 {
+                            margin: 0 auto;
+                        } .list_category > form {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center ;
     } .main_sidebar {
             display: flex;
             flex-direction: column;

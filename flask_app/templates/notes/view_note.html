@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calender.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/notes.css') }}">
 </head>
 <body>
     
@@ -69,14 +69,34 @@
                                 <p><i>{{ command_prompt }}</i></p>
                             </div>
                             {% endif %}
-                            {% if all_notes %}
-                            {% for note in all_notes %}
-                            <div class="notes-body">
-                                <h5>Note</h5>
-                                <p>{{ note.note }}</p>
+
+                            <div class="note_body">
+                                {% if all_notes %}
+                                {% for note in all_notes %}
+                                <table class="note">
+                                    <thead>
+                                        <th>
+                                            <h5>Note</h5>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ note.note }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="note_button">
+                                                    <a>Edit</a>
+                                                    <a>Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            {% endfor %}
-                            {% endif %}
+
                         </div>
                     </div>
                     <form class="content_search" method="POST" action="/create_command">
