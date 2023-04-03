@@ -41,9 +41,18 @@
                 <div class="content">
                     <!-- need to set up an area for information to be displayed, using the search bar as an active assistant for files and connections -->
                     <div class="content_body">
-                        
-                        <div class="notes">
-
+                        <div class="list_category">
+                            <div>
+                                <p><b>List of Categories</b></p>
+                                
+                            </div>
+                            <div class="command_response">
+                                <h4>Command Response : </h4>
+                                <p><i>{{ command_prompt }}</i></p>
+                            </div>
+                            <form method="POST" action="/refresh">
+                                <button>Refresh</button>
+                            </form>
                         </div>
                         <div class="user_commands">
                             {% if commands %}

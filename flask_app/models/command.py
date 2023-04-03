@@ -117,11 +117,11 @@ class Command:
 
     @classmethod
     def command_list(cls, input, user_id,redirect_path=redirect_path):
-        list = cls.get_all(user_id)
+        commands_list = cls.get_all(user_id)
         notes_list = Note.get_all_note_one_user(user_id)
-        count = len(list)
-        current_id = None
-        previous_id = None
+        count = len(commands_list)
+        current_id_commands = None
+        previous_id_commands = None
         current_command = None
         previous_command = None
         current_id_1 = None
@@ -130,16 +130,18 @@ class Command:
         previous_id_1_command = None
         notes_list = None
         notes_path = None
-        if list:
+        if commands_list:
             if count > 1:
-                for data in list:
-                    current_id = data.id
-                    previous_id = current_id - 1
-            if previous_id:
-                if current_id:
-                    current_data = cls.get_one(current_id)
-                    if cls.get_one(previous_id) != None:
-                        previous_data = cls.get_one(previous_id)
+                for index, data in enumerate(commands_list):
+                    if index == 0:
+                        current_id_commands = data.id
+                    if index == 1:
+                        previous_id_commands = data.id
+            if previous_id_commands:
+                if current_id_commands:
+                    current_data = cls.get_one(current_id_commands)
+                    if cls.get_one(previous_id_commands) != None:
+                        previous_data = cls.get_one(previous_id_commands)
                         current_command = current_data.command
                         previous_command = previous_data.command
 
@@ -147,16 +149,16 @@ class Command:
             validation_response = cls.validate_command(input)
 
             if count > 2:
-                for data in list:
+                for index, data in enumerate(commands_list):
                     # add
                     current_id_1 = data.id
                     # manage
-                    previous_id_1 = current_id - 1
+                    previous_id_1 = data.id
                     # open calender
-                    previous_id_2 = current_id - 2
+                    previous_id_2 = data.id
 
                 if cls.get_one(previous_id_2) != None:
-                    current_id_1 = cls.get_one(current_id)
+                    current_id_1 = cls.get_one(current_id_1)
                     previous_id_1 = cls.get_one(previous_id_1)
                     previous_id_2 = cls.get_one(previous_id_2)
 
