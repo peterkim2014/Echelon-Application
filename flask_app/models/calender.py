@@ -4,7 +4,7 @@ from flask_app.models.user import User
 
 class Calender:
     
-    dB = "echelon_data"
+    dB = "minute_data"
 
     def __init__(self, calender_data):
         self.id = calender_data["id"]

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/minute.css') }}">
+</head>
+<body>
+    
+    <div id="global">
+
+        <div class="nav_bar">
+            <h2>Echelon</h2>
+            <div class="nav_links">
+                <a href="/homepage">Return to home</a>
+                <a href="/setting_page">Settings</a>
+                <a href="/login_page">Logout</a>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="main_sidebar">
+            </div>
+
+            <div class="main_body">
+                <div class="chat_main">
+                    <div class="content">
+                        <h3><i>Connect to your future</i></h3>
+                        <div class="content_body">
+                            <div class="list_category">
+                                <div class="multiple_topics">
+                                    <div class="one_topic">
+                                        <p><b>List of Topics</b></p>
+                                        <div class="list">
+                                            <a><i>Business Aspirations</i></a>
+                                            <a><i>Hobbies</i></a>
+                                            <a><i>Passion</i></a>
+                                            <a><i>Meet</i></a>
+                                        </div>
+                                    </div>
+                                    <div class="one_topic">
+                                        <p><b>Chat History</b></p>
+                                        <div class="list">
+                                            <a><i>View</i></a>
+                                            <a><i>Manage</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if command_prompt %}
+                                <div class="command_response">
+                                    <h4>Command Response : </h4>
+                                    <p><i>{{ command_prompt }}</i></p>
+                                </div>
+                                <form method="POST" action="/refresh">
+                                    <button>Refresh</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            <div class="user_commands">
+                                {% if commands %}
+                                {% for command in commands %}
+                                <div class="single_command">
+                                    <h4>Your Command : </h4>
+                                    <p>{{ command.command }}</p>
+                                    <p>{{ command.created_at }}</p>
+                                    <div class="command_buttons">
+                                        <form action="/delete_command" method="POST">
+                                            <label for="delete">
+                                                <input type="hidden" name="id" value={{ command.id }}>
+                                                <input name="delete" type="submit" value="Undo"/>
+                                            </label>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                                {% if commands %}
+                                <div class="return_commands">
+                                    <h4>Command Response : </h4>
+                                    <p><i>{{ command_prompt }}</i></p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if commands %}
+                        <form class="content_search" method="POST" action="/create_command">
+                            <label class="search_label" for="search_input">
+                                <input type=hidden name="user_id" value={{ user_id }}>
+                                <input class="search_input" type="search" name="search_input" value="" placeholder="Type a command..." autofocus>
+                            </label>
+                            <button class="submit_search">Submit</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div class="footer">
+                        <h5>Online
+                            <span>Count : 0</span>
+                        </h5> 
+                          <!-- if user exists  -->
+                          <!-- div -->
+                          <!-- /div -->
+                          <!-- endif -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="{{url_for('static', filename='javascript/calender.js')}}"></script>
+</body>
+</html>

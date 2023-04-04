@@ -5,7 +5,7 @@ from flask_app.models.note import Note
 
 class Command:
 
-    dB = "echelon_data"
+    dB = "minute_data"
     redirect_path = None
 
     def __init__(self, command_data):
@@ -202,23 +202,33 @@ class Command:
     @classmethod
     def notes_path(cls, commands):
         is_path = None
+        note_path = "open notes"
+
+        calender_path = "open calender"
         notes_add = ["open notes", "manage", "add"]
         notes_edit = ["open notes", "manage", "edit"]
-        calender_add = ["open calender", "manage", "add"]
-        calender_edit = ["open calender", "manage", "edit"]
+        calenders_add = ["open calender", "manage", "add"]
+        calenders_edit = ["open calender", "manage", "edit"]
 
         for command in commands:
-            for note in notes_add:
-                if command == note:
+            for note_add in notes_add:
+                if command == note_add:
                     is_path = "note_add"
-            for note in notes_edit:
-                if command == note:
-                    is_path = "note_edit"
-            for calender in calender_add:
-                if command == calender:
-                    is_path = "calender_add"
-            for calender in calender_edit:
-                if command == calender:
-                    is_path = "calender_edit"
+                
+                for note_edit in notes_edit:
+                    if command == note_edit:
+                        is_path = "note_edit"
+            
+                    for calender_add in calenders_add:
+                        if command == calender_add:
+                            is_path = "calender_add"
+                            
+                        for calender_edit in calenders_edit:
+                            if command == calender_edit:
+                                is_path = "calender_edit"
+                 
+        print(commands)
+        print(is_path)
+                    
         return is_path
 

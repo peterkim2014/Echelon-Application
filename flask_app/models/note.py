@@ -4,7 +4,7 @@ from flask_app.models.user import User
 
 class Note:
     
-    dB = "echelon_data"
+    dB = "minute_data"
 
     def __init__(self, notes_data):
         self.id = notes_data["id"]
