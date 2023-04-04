@@ -13,7 +13,6 @@ def homepage():
 
     user_id = session["user_id"]
     last_command = 0
-    previous_command = last_command - 1
     all_notes = Note.get_all_note_one_user(user_id)
     all_calender = Calender.get_all_calender_one_user(user_id)
     last_note_id = None
