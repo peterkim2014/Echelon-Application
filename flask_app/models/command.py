@@ -75,13 +75,12 @@ class Command:
             return is_valid
 
 
-    @staticmethod
-    def validate_command(input):
+    @classmethod
+    def validate_command(cls, input):
         stage = 0
         command_list = ["open calender","open notes","view","manage","add","edit","invalid"]
         
         for command in command_list:
-            # if input.lower() == command:
             if input == command:
                 return stage
             else:
@@ -89,22 +88,6 @@ class Command:
         for stage in range(0, stage):
             return stage
 
-
-    @classmethod
-    def command_response(cls, commands, id):
-        last_command = 0
-
-        for command in commands:
-            command_id = command.id
-            last_command = command_id
-            command_data = Command.get_all(id)
-
-        if command_data:
-            command_single = Command.get_one(last_command)
-
-        single_command = command_single.command
-        initial_command = cls.command_list(single_command)
-        return initial_command
     
     @staticmethod
     def command_path(command):
@@ -145,7 +128,6 @@ class Command:
                         previous_command = previous_data.command
 
             command_path = cls.command_path(previous_command)
-            # validation_response = cls.validate_command(current_command)
             if input:
                 validation_response = cls.validate_command(input)
             else:
@@ -175,8 +157,6 @@ class Command:
                     notes_list = [current_id_1_command, previous_id_1_command, previous_id_2_command]
                     notes_path = cls.notes_path(notes_list)
 
-            print(validation_response)
-
         if validation_response == 0:
             command_prompt = """
                 "View or Manage"
@@ -195,17 +175,28 @@ class Command:
                 Choose from one of the following : add or edit.
             """
             return "command",command_prompt
-        if notes_path == "add":
+        if notes_path == "note_add":
             print("add prompt")
             command_prompt = """
-                Enter your your note and submit
+                Enter your note and submit
             """
             return "add_note", command_prompt
-        if notes_path == "edit":
+        if notes_path == "note_edit":
             command_prompt = """
                 Edit your note and submit
             """
             return "edit_note", command_prompt
+        if notes_path == "calender_add":
+            print("add prompt")
+            command_prompt = """
+                Enter your event and submit
+            """
+            return "add_calender", command_prompt
+        if notes_path == "calender_edit":
+            command_prompt = """
+                Edit your event and submit
+            """
+            return "edit_calender", command_prompt
         return False
 
     @classmethod
@@ -213,13 +204,21 @@ class Command:
         is_path = None
         notes_add = ["open notes", "manage", "add"]
         notes_edit = ["open notes", "manage", "edit"]
+        calender_add = ["open calender", "manage", "add"]
+        calender_edit = ["open calender", "manage", "edit"]
 
         for command in commands:
             for note in notes_add:
                 if command == note:
-                    is_path = "add"
+                    is_path = "note_add"
             for note in notes_edit:
                 if command == note:
-                    is_path = "edit"
+                    is_path = "note_edit"
+            for calender in calender_add:
+                if command == calender:
+                    is_path = "calender_add"
+            for calender in calender_edit:
+                if command == calender:
+                    is_path = "calender_edit"
         return is_path
 

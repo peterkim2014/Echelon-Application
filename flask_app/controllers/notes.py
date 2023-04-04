@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, flash, session
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.note import Note
-
+ 
 @app.route("/notes/view")
 def view_note():
     if not "user_id" in session:

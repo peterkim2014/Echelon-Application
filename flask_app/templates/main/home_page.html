@@ -98,6 +98,22 @@
                         </label>
                         <button class="submit_search">Submit</button>
                     </form>
+                    {% elif response_category == "add_calender" %}
+                    <form class="content_search" method="POST" action="/calender/new/create">
+                        <label class="search_label" for="search_input">
+                            <input type=hidden name="user_id" value={{ user_id }}>
+                            <input class="search_input" type="text" name="calender" placeholder="Enter your event..." autofocus>
+                        </label>
+                        <button class="submit_search">Submit</button>
+                    </form>
+                    {% elif response_category == "edit_calender" %}
+                    <form class="content_search" method="POST" action="/edit/calender">
+                        <label class="search_label" for="search_input">
+                            <input type=hidden name="user_id" value={{ user_id }}>
+                            <input class="search_input" type="text" name="calender" value={{ calender.event }} autofocus>
+                        </label>
+                        <button class="submit_search">Submit</button>
+                    </form>
                     {% else %}
                     <form class="content_search" method="POST" action="/create_command">
                         <label class="search_label" for="search_input">
