@@ -5,7 +5,13 @@
     /* first iteration */
     /* background-color: beige; */
     /* second iteration */
-    background-color: rgba(179, 179, 126, 0.217);
+    /* background-color: rgba(179, 179, 126, 0.217); */
+    /* third iteration */
+    /* background-image: linear-gradient(to top, #bdf5e5, #8cf5d7, #5bf5c9, #2af5bb); */
+    /* fourth iteration */
+    background-image: linear-gradient(to bottom, #687399, #828DB4, #9DA7D0, #E8C2EC, #D4DEFF);
+    /* fifth iteration */
+    /* background-color: rgba(5, 25, 55, 0.7); */
 } .nav_bar {
     display: flex;
     justify-content: space-between;
@@ -13,7 +19,9 @@
     /* first iteration */
     /* background-color: rgb(200, 200, 173); */
     /* second iteration */
-    background-color: rgba(142, 142, 95, 0.656);
+    /* background-color: rgba(142, 142, 95, 0.15); */
+    /* third iteration */
+    /* background-color */
     } .nav_links, h2 {
         margin-left: 4%;
         margin-right: 4%;
@@ -32,7 +40,7 @@
         height: 100%;
         } .content {
             height: 80%;
-            background-color: rgba(179, 179, 126, 0.23);
+            background-color: rgba(108, 122, 137, 0.2);
             margin-left: 1.5%;
             margin-right: 1.25%;
             display: flex;
@@ -49,7 +57,9 @@
                     height: 100%;
                 } .search_input {
                     width: 100%;
+                    background-color: #d6f5ec;
                 } .submit_search {
+                    background-color: #d6f5ec;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -65,7 +75,7 @@
                 gap: 0.5vh;
                 scroll-behavior: smooth;
                 } .list_category {
-                    background-color: rgba(179, 179, 126, 0.134);
+                    background-color: rgba(179, 179, 126, 0.05);
                 } .list_category > p {
                     margin-left: 1.25%;
                 } .user_commands {
@@ -122,8 +132,8 @@
                 display: flex;
                 flex-direction: column;
             } .sidebar_calender, .note_options, .group_button {
-                border-color: rgba(121, 121, 121, 0.643);
+                border-color: rgba(121, 121, 121, 0.2);
                 height: 5vh;
-                background-color: rgba(179, 179, 126, 0.591);
+                background-color: rgba(179, 179, 126, 0.05);
                 gap: 1vh;
             }
