@@ -40,7 +40,8 @@
         height: 100%;
         } .content {
             height: 80%;
-            background-color: rgba(108, 122, 137, 0.2);
+            /* background-color: rgba(108, 122, 137, 0.15); */
+            background-color: rgba(239, 239, 240, 0.1);
             margin-left: 1.5%;
             margin-right: 1.25%;
             display: flex;
@@ -75,7 +76,7 @@
                 gap: 0.5vh;
                 scroll-behavior: smooth;
                 } .list_category {
-                    background-color: rgba(179, 179, 126, 0.05);
+                    /* background-color: rgba(179, 179, 126, 0.05); */
                 } .list_category > p {
                     margin-left: 1.25%;
                 } .user_commands {

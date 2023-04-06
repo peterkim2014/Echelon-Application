@@ -9,3 +9,7 @@ from flask_app.models.chat import Chat
 @app.route("/minute")
 def minute_homepage():
     return render_template("minutes/minute_home.html")
+
+@app.route("/minute/business")
+def minute_business():
+    return render_template("minutes/minute_business.html")

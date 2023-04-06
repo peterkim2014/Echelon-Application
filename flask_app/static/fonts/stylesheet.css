@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'sorealism';
+    src: url('sorealism.woff2') format('woff2'),
+        url('sorealism.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

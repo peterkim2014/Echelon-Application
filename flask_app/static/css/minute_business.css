@@ -1,11 +1,3 @@
-@font-face {
-    font-family: 'sorealism';
-    src: url('../static/fonts/sorealism.woff2') format('woff2'),
-        url('../static/fonts/sorealism.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 #global {
     width: 100%;
     height: 98vh;
@@ -18,6 +10,7 @@
     /* fourth iteration */
     background-image: linear-gradient(to bottom, #687399, #828DB4, #9DA7D0, #E8C2EC, #D4DEFF);
     gap: 1.5vh;
+
 } .nav_bar {
     display: flex;
     justify-content: space-between;
@@ -31,7 +24,6 @@
     } .nav_links, h2 {
         margin-left: 4%;
         margin-right: 4%;
-        font: 'sorealism';
     } .nav_links {
         display: flex;
         justify-content: space-between;
@@ -63,10 +55,13 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-family: 'sorealism';
                     } .list_category {
                         width: 100%;
                         height: 75%;
+                    } .list_category > a {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     } .multiple_topics {
                         margin-top: 5%;
                         display: grid;
@@ -89,7 +84,6 @@
                             width: 80%;
                             height: 20%;
                             margin-top: 2.5%;
-                            font-family: 'sorealism';
                             } .list {
                                 display: flex;
                                 flex-direction: column;
